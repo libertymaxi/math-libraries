@@ -1,3 +1,5 @@
 *.o
 main*
 src/main.cpp
+.vscode/settings.json
+makefile

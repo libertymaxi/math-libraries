@@ -71,3 +71,11 @@ Vector Vector :: operator-(Vector vectorOperator) {
 void Vector :: operator-=(Vector vectorOperator) {
     elements = Vector(operator-(vectorOperator)).elements;
 }
+
+Vector Vector :: attach(Vector vectorOperator) {
+    vector<double> newElements = elements;
+    for(int i = 0; i < vectorOperator.elements.size(); i++) {
+        newElements.push_back(vectorOperator.elements[i]);
+    }
+    return Vector(newElements);
+}
