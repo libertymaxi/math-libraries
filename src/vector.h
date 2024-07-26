@@ -9,6 +9,7 @@ class Vector {
     private:
         vector<double> elements;
     public:
+        Vector() = default;
         Vector(vector<double>);
         Vector(unsigned);
         void printVector(void);
