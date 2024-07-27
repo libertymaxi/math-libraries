@@ -12,6 +12,10 @@ Vector :: Vector(unsigned nElements) {
     for(int i = 0; i < nElements; i++) elements.push_back(0.0);
 }
 
+unsigned Vector :: size(void) {
+    return elements.size();
+}
+
 void Vector :: printVector(void) {
     cout << "[";
     for(int i = 0; i < elements.size(); i++) {

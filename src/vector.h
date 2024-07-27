@@ -12,6 +12,7 @@ class Vector {
         Vector() = default;
         Vector(vector<double>);
         Vector(unsigned);
+        unsigned size(void);
         void printVector(void);
         double operator[](unsigned);
         Vector operator+(Vector);
