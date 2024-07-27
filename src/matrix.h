@@ -9,6 +9,11 @@ class Matrix {
         unsigned n, m;
     public:
         Matrix(Vector, unsigned, unsigned);
+        unsigned getNRows(void);
+        unsigned getNColumns(void);
+        void printMatrix(void);
+        Matrix operator+(Matrix);
+        void operator+=(Matrix);
 };
 
 #endif
