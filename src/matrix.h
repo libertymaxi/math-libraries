@@ -14,6 +14,10 @@ class Matrix {
         void printMatrix(void);
         Matrix operator+(Matrix);
         void operator+=(Matrix);
+        Matrix operator*(double);
+        void operator*=(double);
+        Matrix operator-(Matrix);
+        void operator-=(Matrix);
 };
 
 #endif

@@ -48,3 +48,19 @@ Matrix Matrix :: operator+(Matrix matrix) {
 void Matrix :: operator+=(Matrix matrix) {
     if(n == matrix.n && m == matrix.m) elements += matrix.elements;
 }
+
+Matrix Matrix :: operator*(double number) {
+    return Matrix(elements * number, n, m);
+}
+
+void Matrix :: operator*=(double number) {
+    elements *= number;
+}
+
+Matrix Matrix :: operator-(Matrix matrix) {
+    if(n == matrix.n && m == matrix.m) return Matrix(elements - matrix.elements, n, m);
+}
+
+void Matrix :: operator-=(Matrix matrix) {
+    if(n == matrix.n && m == matrix.m) elements -= matrix.elements;
+}
