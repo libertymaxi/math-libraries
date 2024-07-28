@@ -43,6 +43,7 @@ void Matrix :: printMatrix(void) {
 
 Matrix Matrix :: operator+(Matrix matrix) {
     if(n == matrix.n && m == matrix.m) return Matrix(elements + matrix.elements, n, m);
+    else return Matrix(elements, n, m);
 }
 
 void Matrix :: operator+=(Matrix matrix) {
@@ -59,6 +60,7 @@ void Matrix :: operator*=(double number) {
 
 Matrix Matrix :: operator-(Matrix matrix) {
     if(n == matrix.n && m == matrix.m) return Matrix(elements - matrix.elements, n, m);
+    else return Matrix(elements, n, m);
 }
 
 void Matrix :: operator-=(Matrix matrix) {
