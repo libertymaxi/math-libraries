@@ -18,6 +18,8 @@ class Matrix {
         void operator*=(double);
         Matrix operator-(Matrix);
         void operator-=(Matrix);
+        Vector getRow(unsigned);
+        Vector getColumn(unsigned);
 };
 
 #endif

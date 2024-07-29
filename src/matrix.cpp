@@ -66,3 +66,23 @@ Matrix Matrix :: operator-(Matrix matrix) {
 void Matrix :: operator-=(Matrix matrix) {
     if(n == matrix.n && m == matrix.m) elements -= matrix.elements;
 }
+
+Vector Matrix :: getRow(unsigned row) {
+    vector<double> aux;
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < m; j++) {
+            if(i == row) aux.push_back(elements[i * m + j]);
+        }
+    }
+    return Vector(aux);
+}
+
+Vector Matrix :: getColumn(unsigned column) {
+    vector<double> aux;
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < m; j++) {
+            if(j == column) aux.push_back(elements[i * m + j]);
+        }
+    }
+    return Vector(aux);
+}
