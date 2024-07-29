@@ -83,3 +83,18 @@ Vector Vector :: attach(Vector vectorOperator) {
     }
     return Vector(newElements);
 }
+
+double Vector :: operator*(Vector vectorOperator) {
+    double sum = 0;
+    if(size() < vectorOperator.size()) {
+        for(int i = 0; i < size(); i++) {
+            sum += (elements[i] * vectorOperator.elements[i]);
+        }
+    }
+    else {
+        for(int i = 0; i < vectorOperator.size(); i++) {
+            sum += (elements[i] * vectorOperator.elements[i]);
+        }
+    }
+    return sum;
+}

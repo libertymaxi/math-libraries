@@ -22,6 +22,7 @@ class Vector {
         Vector operator-(Vector);
         void operator-=(Vector);
         Vector attach(Vector);
+        double operator*(Vector);
 };
 
 #endif
