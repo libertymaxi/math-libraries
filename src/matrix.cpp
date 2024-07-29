@@ -86,3 +86,20 @@ Vector Matrix :: getColumn(unsigned column) {
     }
     return Vector(aux);
 }
+
+Matrix Matrix :: operator*(Matrix matrix) {
+    if(m == matrix.n) {
+        vector<double> newMatrix;
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < matrix.m; j++) {
+                //newMatrix.attach(Vector());
+                newMatrix.push_back(getRow(i) * matrix.getColumn(j));
+            }
+        }
+        return Matrix(Vector(newMatrix), n, matrix.m);
+    }
+}
+
+void Matrix :: operator*=(Matrix matrix) {
+    elements = operator*(matrix).elements;
+}

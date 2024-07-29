@@ -20,6 +20,8 @@ class Matrix {
         void operator-=(Matrix);
         Vector getRow(unsigned);
         Vector getColumn(unsigned);
+        Matrix operator*(Matrix);
+        void operator*=(Matrix);
 };
 
 #endif
