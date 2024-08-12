@@ -3,18 +3,16 @@
 
 #include <vector>
 
-using namespace std;
-
 class Vector {
     private:
-        vector<double> elements;
+        std::vector<double> elements;
     public:
         Vector() = default;
-        Vector(vector<double>);
+        Vector(std::vector<double>);
         Vector(unsigned);
         unsigned size(void);
         void printVector(void);
-        double operator[](unsigned);
+        double operator[](int);
         Vector operator+(Vector);
         void operator+=(Vector);
         Vector operator*(double);
@@ -23,6 +21,7 @@ class Vector {
         void operator-=(Vector);
         Vector attach(Vector);
         double operator*(Vector);
+        Vector subVector(int, int);
 };
 
 #endif

@@ -4,7 +4,7 @@
 #include <iomanip>
 #include <cmath>
 
-Vector :: Vector(vector<double> newElements) {
+Vector :: Vector(std::vector<double> newElements) {
     elements = newElements;
 }
 
@@ -17,22 +17,23 @@ unsigned Vector :: size(void) {
 }
 
 void Vector :: printVector(void) {
-    cout << "[";
+    std::cout << "[";
     for(int i = 0; i < elements.size(); i++) {
-        if(elements[i] < 0) cout << "-";
-        else cout << "+";
-        cout << setprecision(3) << fixed << fabs(elements[i]);
-        if(i < elements.size() - 1) cout << " ";
+        if(elements[i] < 0) std::cout << "-";
+        else std::cout << "+";
+        std::cout << std::setprecision(3) << std::fixed << fabs(elements[i]);
+        if(i < elements.size() - 1) std::cout << " ";
     }
-    cout << "]" << endl;
+    std::cout << "]" << std::endl;
 }
 
-double Vector :: operator[](unsigned index) {
+double Vector :: operator[](int index) {
+    if(index < 0 || index >= elements.size()) throw std::invalid_argument("Index out of bounds");
     return elements[index];
 }
 
 Vector Vector :: operator+(Vector vectorOperator) {
-    vector<double> newElements;
+    std::vector<double> newElements;
     if(elements.size() < vectorOperator.elements.size()) {
         for(int i = 0; i < elements.size(); i++) {
             newElements.push_back(elements[i] + vectorOperator.elements[i]);
@@ -57,7 +58,7 @@ void Vector :: operator+=(Vector vectorOperator) {
 }
 
 Vector Vector :: operator*(double number) {
-    vector<double> newElements;
+    std::vector<double> newElements;
     for(int i = 0; i < elements.size(); i++) {
         newElements.push_back(elements[i] * number);
     }
@@ -77,7 +78,7 @@ void Vector :: operator-=(Vector vectorOperator) {
 }
 
 Vector Vector :: attach(Vector vectorOperator) {
-    vector<double> newElements = elements;
+    std::vector<double> newElements = elements;
     for(int i = 0; i < vectorOperator.elements.size(); i++) {
         newElements.push_back(vectorOperator.elements[i]);
     }
@@ -97,4 +98,13 @@ double Vector :: operator*(Vector vectorOperator) {
         }
     }
     return sum;
+}
+
+Vector Vector :: subVector(int a, int b) {
+    if(a < 0 || b < 0 || a > b || a >= elements.size() || b >= elements.size()) throw std::invalid_argument("One or both indices are out of bounds");
+    std::vector<double> newElements;
+    for(int i = a; i <= b; i++) {
+        newElements.push_back(elements[i]);
+    }
+    return Vector(newElements);
 }
