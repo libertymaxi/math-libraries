@@ -122,16 +122,15 @@ Matrix Matrix :: stackHorizontal(Matrix matrix) {
 
 Matrix Matrix :: subMatrix(unsigned a, unsigned b, unsigned c, unsigned d) {
     std::vector<double> newElements;
-    if(a >= 0 && b < n && a <= b && c >= 0 && d < n && c <= d) {
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < m; j++) {
-                if(i >= a && i <= b && j >= c && j <= d) {
-                    newElements.push_back(elements[i * m + j]);
-                }
+    if(!(a >= 0 && b < n && a <= b && c >= 0 && d < n && c <= d)) throw std::invalid_argument("Invalid indices");
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < m; j++) {
+            if(i >= a && i <= b && j >= c && j <= d) {
+                newElements.push_back(elements[i * m + j]);
             }
         }
-        return Matrix(Vector(newElements), b - a + 1, d - c + 1);
     }
+    return Matrix(Vector(newElements), b - a + 1, d - c + 1);
 }
 
 bool Matrix :: isSquare(void) {
