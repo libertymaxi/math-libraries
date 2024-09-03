@@ -2,4 +2,4 @@
 main*
 src/main.cpp
 .vscode/settings.json
-makefile
+.vscode/c_cpp_properties.json
