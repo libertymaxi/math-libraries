@@ -8,7 +8,8 @@ Vector :: Vector(std::vector<double> newElements) {
     elements = newElements;
 }
 
-Vector :: Vector(unsigned nElements) {
+Vector :: Vector(int nElements) {
+    if(nElements < 0) throw std::invalid_argument("Size of vector must be a positive number");
     for(int i = 0; i < nElements; i++) elements.push_back(0.0);
 }
 

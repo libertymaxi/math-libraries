@@ -7,18 +7,20 @@ class Vector {
     private:
         std::vector<double> elements;
     public:
-        Vector() = default;
+        Vector() = default; // no need to test this
         Vector(std::vector<double>);
-        Vector(unsigned);
+        Vector(int);
         unsigned size(void);
-        void printVector(void);
+        void printVector(void); // no need to test this
         double operator[](int);
+        // BEGIN OPERATORS
         Vector operator+(Vector);
         void operator+=(Vector);
         Vector operator*(double);
         void operator*=(double);
         Vector operator-(Vector);
         void operator-=(Vector);
+        // END OPERATORS
         Vector attach(Vector);
         double operator*(Vector);
         Vector subVector(int, int);

@@ -63,7 +63,7 @@ void Matrix :: operator-=(Matrix matrix) {
     elements -= matrix.elements;
 }
 
-Vector Matrix :: getRow(int row) {
+Vector Matrix :: row(int row) {
     if(row < 0 || row >= n) throw std::invalid_argument("Argument must be positive and less than the number of rows");
     std::vector<double> aux;
     for(int i = 0; i < n; i++) {
@@ -74,7 +74,7 @@ Vector Matrix :: getRow(int row) {
     return Vector(aux);
 }
 
-Vector Matrix :: getColumn(int column) {
+Vector Matrix :: column(int column) {
     if(column < 0 || column >= m) throw std::invalid_argument("Argument must be positive and less than the number of columns");
     std::vector<double> aux;
     for(int i = 0; i < n; i++) {
@@ -88,7 +88,7 @@ Matrix Matrix :: operator*(Matrix matrix) {
     std::vector<double> newMatrix;
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < matrix.m; j++) {
-            newMatrix.push_back(getRow(i) * matrix.getColumn(j));
+            newMatrix.push_back(row(i) * matrix.column(j));
         }
     }
     return Matrix(Vector(newMatrix), n, matrix.m);
@@ -101,7 +101,7 @@ void Matrix :: operator*=(Matrix matrix) {
 Matrix Matrix :: transpose(void) {
     Vector newElements;
     for(int i = 0; i < m; i++) {
-        newElements = newElements.attach(getColumn(i));
+        newElements = newElements.attach(column(i));
     }
     return Matrix(newElements, m, n);
 }
@@ -115,7 +115,7 @@ Matrix Matrix :: stackHorizontal(Matrix matrix) {
     if(n != matrix.n) throw std::invalid_argument("Both matrices must have the same number of rows");
     Vector newElements;
     for(int i = 0; i < n; i++) {
-        newElements = newElements.attach(getRow(i).attach(matrix.getRow(i)));
+        newElements = newElements.attach(row(i).attach(matrix.row(i)));
     }
     return Matrix(newElements, n, m + matrix.m);
 }
@@ -133,6 +133,56 @@ Matrix Matrix :: subMatrix(unsigned a, unsigned b, unsigned c, unsigned d) {
     return Matrix(Vector(newElements), b - a + 1, d - c + 1);
 }
 
+Matrix Matrix :: removeRow(int a) {
+    // handle possible errors
+    if(a < 0 || a >= n) throw std::invalid_argument("row must be a positive number and less than the number of rows");
+
+    if(a == 0) return subMatrix(1, n - 1, 0, m - 1);
+    else if(a == n - 1) return subMatrix(0, n - 2, 0, m - 1);
+    else return subMatrix(0, a - 1, 0, m - 1).stackVertical(subMatrix(a + 1, n - 1, 0, m - 1));
+}   
+
+Matrix Matrix :: removeColumn(int b) {
+    //handle possible errors
+    if(b < 0 || b >= m) throw std::invalid_argument("column must be a positive number and less than the number of columns");
+    
+    if(b == 0) return subMatrix(0, n - 1, 1, m - 1);
+    else if(b == m - 1) return subMatrix(0, n - 1, 0, m - 2);
+    else return subMatrix(0, n - 1, 0, b - 1).stackHorizontal(subMatrix(0, n - 1, b + 1, m - 1));
+}
+
 bool Matrix :: isSquare(void) {
     return (n == m) ? true : false;
+}
+
+int Matrix :: determinant(void) {
+    if(!isSquare()) throw std::invalid_argument("The matrix must be a square matrix");
+    else if(n < 2) throw std::invalid_argument("The matrix must be at least 2x2");
+
+    if(n == 2) {
+        return elements[0] * elements[3] - elements[1] * elements[2];
+    }
+    else {
+        unsigned determinant = 0;
+
+        for(int i = 0; i < m; i++) {
+            determinant += pow(-1, i) * elements[0 * m + i] * removeColumn(i).removeRow(0).determinant();
+        }
+
+        return determinant;
+    }
+}
+
+Matrix Matrix :: identityMatrix(int n) {
+    if(n <= 1) throw std::invalid_argument("Matrix size must be a positive number greater than 1");
+    else {
+        std::vector<double> newElements;
+        for(int i = 0; i < n; i ++) {
+            for(int j = 0; j < n; j++) {
+                if(i == j) newElements.push_back(1);
+                else newElements.push_back(0);
+            }
+        }
+        return Matrix(Vector(newElements), n, n);
+    }
 }
