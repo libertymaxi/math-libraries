@@ -29,7 +29,9 @@ void Vector :: printVector(void) {
 }
 
 double Vector :: operator[](int index) {
-    if(index < 0 || index >= elements.size()) throw std::invalid_argument("Index out of bounds");
+    //if(index < 0 || index >= elements.size()) throw std::invalid_argument("Index out of bounds");
+    if(index < 0) throw std::invalid_argument("index must be a positive number");
+    else if(index >= elements.size()) throw std::invalid_argument("index must be less than the vector's size");
     return elements[index];
 }
 
