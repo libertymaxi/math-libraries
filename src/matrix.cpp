@@ -173,6 +173,30 @@ int Matrix :: determinant(void) {
     }
 }
 
+bool Matrix :: isMatrixTall(void) {
+    return (n > m) ? true : false;
+}
+
+bool Matrix :: isMatrixWide(void) {
+    return (m > n) ? true : false;
+}
+
+Matrix Matrix :: rowOperation(int targetRow, int originRow, double factor) {
+    std::vector<double> newElements;
+
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < m; j++) {
+            if(i != targetRow) {
+                newElements.push_back(elements[i * m + j]);
+            }
+            else newElements.push_back(elements[targetRow * m + j] + (factor * elements[originRow * m + j]));
+        }
+    }
+
+    return Matrix(Vector(newElements), n, m);
+}
+
+// static method
 Matrix Matrix :: identityMatrix(int n) {
     if(n <= 1) throw std::invalid_argument("Matrix size must be a positive number greater than 1");
     else {

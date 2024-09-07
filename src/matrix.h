@@ -41,8 +41,17 @@ class Matrix {
         // multiply 2 matrices
         Matrix operator*(Matrix);
         void operator*=(Matrix);
+        /**
+         * Returns the transpose of the matrix
+        */
         Matrix transpose(void);
+        /**
+         * Stacks 2 matrices vertically
+        */
         Matrix stackVertical(Matrix);
+        /**
+         * Stacks 2 matrices horizontally
+        */
         Matrix stackHorizontal(Matrix);
         Matrix subMatrix(unsigned, unsigned, unsigned, unsigned);
         /**
@@ -62,6 +71,9 @@ class Matrix {
          * @exception std::invalid_argument, if the matrix is not square
          */
         int determinant(void);
+        bool isMatrixTall(void);
+        bool isMatrixWide(void);
+        Matrix rowOperation(int, int, double);
         
         static Matrix identityMatrix(int);
 };
