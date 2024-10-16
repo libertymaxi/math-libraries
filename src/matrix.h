@@ -74,6 +74,9 @@ class Matrix {
         bool isMatrixTall(void);
         bool isMatrixWide(void);
         Matrix rowOperation(int, int, double);
+        Matrix columnOperation(int, int, double);
+        Matrix gaussElimination(void);
+        double getElement(int, int);
         
         static Matrix identityMatrix(int);
 };

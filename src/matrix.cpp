@@ -189,11 +189,43 @@ Matrix Matrix :: rowOperation(int targetRow, int originRow, double factor) {
             if(i != targetRow) {
                 newElements.push_back(elements[i * m + j]);
             }
-            else newElements.push_back(elements[targetRow * m + j] + (factor * elements[originRow * m + j]));
+            else newElements.push_back(elements[targetRow * m + j] + factor * elements[originRow * m + j]);
         }
     }
 
     return Matrix(Vector(newElements), n, m);
+}
+
+Matrix Matrix :: columnOperation(int targetColumn, int originColumn, double factor) {
+    std::vector<double> newElements;
+
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < m; j++) {
+            if(j != targetColumn) newElements.push_back(elements[i * m + j]);
+            else newElements.push_back(elements[i * m + targetColumn] + factor * elements[i * m + originColumn]);
+        }
+    }
+
+    return Matrix(Vector(newElements), n, m);
+}
+
+Matrix Matrix :: gaussElimination(void) {
+    Matrix newMatrix(elements, n, m);
+    //std::cout << elements[n] << " " << elements[0] << std::endl;
+    //return newMatrix.rowOperation(1, 0, -1 * elements[m] * elements[0]);
+    int originalRow = 0, targetRow = 0;
+
+    for(int i = 0; i < m; i++) {
+        newMatrix = rowOperation();
+        originalRow++;
+    }
+
+    return newMatrix;
+}
+
+double Matrix::getElement(int row, int column) {
+    if(row < 0 || row > n - 1 || column < 0 || column > m - 1) throw std::invalid_argument("row and column must both be positive numbers");
+    return elements[row * m + column];
 }
 
 // static method
